@@ -39,6 +39,23 @@ A V2 transforma a experiencia em um produto web:
 - Excel: exceljs.
 - Deploy sugerido: Vercel para front-end e um provedor com plano gratuito para API + PostgreSQL.
 
+## GitHub Topics
+
+Sugestao de topicos para configurar no repositorio:
+
+```txt
+nodejs
+express
+prisma
+postgresql
+javascript
+finance
+dashboard
+jwt
+portfolio
+fullstack
+```
+
 ## Estrutura
 
 ```text
@@ -245,3 +262,7 @@ Antes, o JavaScript salvava tudo no `localStorage`, bom para estudo visual. Agor
 - Adicionar importacao CSV.
 - Conectar provedor externo de IA somente se houver decisao futura clara sobre custo, privacidade e termos de uso.
 - Publicar prints e link de deploy no README.
+
+## Licenca
+
+Este projeto esta sob a licenca MIT. Consulte o arquivo [LICENSE](LICENSE).
