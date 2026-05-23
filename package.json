@@ -15,7 +15,7 @@
     "prisma:generate": "npm --prefix backend run prisma:generate",
     "prisma:migrate": "npm --prefix backend run prisma:migrate",
     "prisma:migrate:deploy": "npm --prefix backend run prisma:migrate:deploy",
-    "render:build": "npm run install:all && npm run prisma:generate",
+    "render:build": "npm --prefix backend ci --include=dev && npm run prisma:generate",
     "deploy:start": "npm run prisma:migrate:deploy && npm start"
   }
 }

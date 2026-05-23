@@ -159,7 +159,14 @@ Build: npm run render:build
 Start: npm run deploy:start
 ```
 
-O start executa `prisma migrate deploy` antes de iniciar a API, garantindo que o banco receba as migrations versionadas.
+O build instala as dependencias do backend com `--include=dev` porque o Prisma CLI e necessario para gerar o client e aplicar migrations. O start executa `prisma migrate deploy` antes de iniciar a API, garantindo que o banco receba as migrations versionadas.
+
+Se o deploy falhar, confira primeiro:
+
+- `DATABASE_URL` foi preenchido no Render.
+- A URL nao pode usar `localhost`; precisa ser a URL do PostgreSQL online.
+- Em bancos como Neon, a URL geralmente termina com `?sslmode=require`.
+- O banco precisa estar ativo antes do deploy rodar.
 
 Depois do deploy, teste:
 
