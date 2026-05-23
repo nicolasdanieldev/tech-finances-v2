@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechFinances V2</title>
+  <meta name="description" content="Projeto full-stack de finan&ccedil;as pessoais com login, API, PostgreSQL, Excel, PDF e recomenda&ccedil;&atilde;o educativa an&ocirc;nima." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon-192x192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#08090d" />
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("techfinances_theme");
+        document.documentElement.dataset.theme = savedTheme || "dark";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div id="splashScreen" class="splash-screen" aria-label="Carregando TechFinances">
+    <div class="splash-brand">
+      <span class="splash-logo">TF</span>
+      <strong>TechFinances</strong>
+      <small>Financial SaaS Dashboard</small>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#welcomeTemplate" aria-label="In&iacute;cio do TechFinances">
+        <span class="logo">TF</span>
+        <span>TechFinances</span>
+      </a>
+      <nav class="navlinks" aria-label="Navega&ccedil;&atilde;o principal">
+        <a href="#welcomeTemplate">Produto</a>
+        <a href="#principios">Miss&atilde;o e valores</a>
+        <a href="#authSection">Entrar</a>
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Alternar tema" aria-pressed="false">
+          <span id="themeToggleLabel">Modo claro</span>
+        </button>
+        <button class="btn secondary small" type="button" id="logoutBtn">Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="welcomeTemplate" class="welcome-template bento-landing" aria-label="Abertura do TechFinances">
+      <div class="welcome-copy bento-card bento-hero-card">
+        <span class="pill">SaaS financeiro | Portf&oacute;lio full-stack | Educa&ccedil;&atilde;o financeira</span>
+        <h1>TechFinances para controlar seu dinheiro com clareza.</h1>
+        <p>
+          Acompanhe receitas, despesas, saldo mensal, metas e prioridades financeiras em uma experi&ecirc;ncia
+          visual, segura e pronta para demonstrar compet&ecirc;ncia full-stack.
+        </p>
+        <div class="hero-actions">
+          <button class="btn" type="button" id="startRegisterBtn">Criar minha conta</button>
+          <button class="btn secondary" type="button" id="startLoginBtn">J&aacute; tenho acesso</button>
+        </div>
+        <div class="landing-metrics" aria-label="Destaques do projeto">
+          <div><strong>Seguro</strong><span>JWT, bcrypt e 2FA</span></div>
+          <div><strong>Dados reais</strong><span>API + PostgreSQL</span></div>
+          <div><strong>Relat&oacute;rios</strong><span>Excel e PDF</span></div>
+        </div>
+      </div>
+
+      <div class="welcome-preview bento-card bento-preview-card" aria-label="Pr&eacute;via do produto">
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="product-preview">
+            <aside class="preview-sidebar">
+              <span class="sidebar-mark"></span>
+              <i></i><i></i><i></i>
+            </aside>
+            <div class="preview-content">
+              <div class="preview-top">
+                <div>
+                  <span class="mock-title">Saldo mensal</span>
+                  <strong>R$ 1.050,00</strong>
+                </div>
+                <span class="tag info">Saud&aacute;vel</span>
+              </div>
+              <div class="preview-grid">
+                <div class="preview-card"><span>Receitas</span><strong>R$ 2.500</strong></div>
+                <div class="preview-card"><span>Despesas</span><strong>R$ 1.450</strong></div>
+              </div>
+              <div class="template-bars">
+                <label>Essenciais</label>
+                <span style="width: 58%"></span>
+                <label>Vari&aacute;veis</label>
+                <span style="width: 42%"></span>
+                <label>Reserva</label>
+                <span style="width: 24%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <article class="bento-card bento-insight">
+        <span class="tag info">Miss&atilde;o</span>
+        <strong>Desenvolver uma solu&ccedil;&atilde;o digital acess&iacute;vel, intuitiva e inteligente.</strong>
+        <p>Ajudar pessoas a organizarem finan&ccedil;as pessoais e tomarem decis&otilde;es mais conscientes com tecnologia, dados e educa&ccedil;&atilde;o financeira.</p>
+      </article>
+
+      <article class="bento-card bento-status">
+        <span>Vis&atilde;o</span>
+        <strong>Refer&ecirc;ncia em educa&ccedil;&atilde;o financeira digital</strong>
+        <small>Evoluir com an&aacute;lise de dados, automa&ccedil;&atilde;o e IA educativa, preservando privacidade e clareza.</small>
+      </article>
+    </section>
+
+    <section id="principios" class="section principles-section" aria-labelledby="principlesTitle">
+      <div class="section-title">
+        <div>
+          <span class="pill">🎯 Missão | 🚀 Visão | 💎 Valores</span>
+          <h2 id="principlesTitle">Missão, visão e valores</h2>
+          <p>
+            O TechFinances nasce para unir organização financeira, tecnologia e educação em uma experiência simples,
+            segura e orientada a decisões mais conscientes.
+          </p>
+        </div>
+      </div>
+
+      <div class="values-grid">
+        <article class="card value-card strong">
+          <span class="value-icon" aria-hidden="true">🎯</span>
+          <h3>Missão</h3>
+          <p>
+            Desenvolver uma solução digital acessível, intuitiva e inteligente para ajudar pessoas a organizarem
+            suas finanças pessoais, compreenderem melhor seus gastos e tomarem decisões financeiras mais conscientes
+            por meio de tecnologia, dados e educação financeira.
+          </p>
+        </article>
+
+        <article class="card value-card strong">
+          <span class="value-icon" aria-hidden="true">🚀</span>
+          <h3>Visão</h3>
+          <p>
+            Ser uma plataforma de referência em educação financeira digital, evoluindo continuamente com recursos
+            de análise de dados, automação e inteligência artificial para apoiar usuários na construção de uma vida
+            financeira mais organizada, segura e planejada.
+          </p>
+        </article>
+
+        <article class="card value-card values-intro">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Valores</h3>
+          <p>
+            Educação financeira, simplicidade, tecnologia com propósito, segurança, privacidade, organização,
+            clareza, evolução contínua e responsabilidade orientam cada decisão do projeto.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Educação Financeira</h3>
+          <p>
+            Acreditamos que o conhecimento financeiro é essencial para transformar hábitos, evitar decisões
+            impulsivas e construir uma relação mais saudável com o dinheiro.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Simplicidade</h3>
+          <p>
+            Buscamos criar uma experiência clara, objetiva e fácil de usar, tornando o controle financeiro mais
+            acessível mesmo para quem está começando.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Tecnologia com Propósito</h3>
+          <p>
+            Utilizamos tecnologia não apenas para automatizar processos, mas para resolver problemas reais e gerar
+            impacto positivo na vida das pessoas.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Segurança e Privacidade</h3>
+          <p>
+            Valorizamos a proteção dos dados financeiros do usuário, priorizando boas práticas de segurança,
+            transparência e uso responsável das informações.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Organização e Clareza</h3>
+          <p>
+            Transformamos dados financeiros em informações visuais, organizadas e compreensíveis, facilitando a
+            análise de receitas, despesas, metas e prioridades.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Evolução Contínua</h3>
+          <p>
+            O projeto será desenvolvido de forma progressiva, com melhorias constantes em interface, funcionalidades,
+            análise financeira, relatórios e futuras integrações com IA.
+          </p>
+        </article>
+
+        <article class="card value-card">
+          <span class="value-icon" aria-hidden="true">💎</span>
+          <h3>Responsabilidade</h3>
+          <p>
+            As recomendações financeiras devem ser tratadas como apoio educativo, sempre incentivando o usuário a
+            estudar, comparar opções e buscar orientação profissional quando necessário.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="hero bento-dashboard-hero">
+      <div>
+        <span class="pill">Projeto full-stack | JWT | PostgreSQL | Excel real</span>
+        <h1>Controle financeiro com cara de <span class="gradient-text">produto profissional</span>.</h1>
+        <p>A V2 troca o localStorage por uma API protegida, banco PostgreSQL e exporta&ccedil;&atilde;o XLSX/PDF. O front-end continua em HTML, CSS e JS puro para facilitar o aprendizado.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#lancamentos">Adicionar lan&ccedil;amento</a>
+          <button class="btn secondary" type="button" id="exportExcelBtn">Exportar Excel</button>
+          <button class="btn secondary" type="button" id="exportPdfBtn">Relat&oacute;rio PDF</button>
+        </div>
+      </div>
+
+      <aside class="hero-panel bento-card" aria-label="Resumo financeiro">
+        <div class="mock-card">
+          <div class="mock-row">
+            <div>
+              <div class="mock-title">Saldo atual</div>
+              <div class="mock-value" id="heroBalance">R$ 0,00</div>
+            </div>
+            <span class="tag info" id="healthTag">Sem dados</span>
+          </div>
+          <canvas id="heroChart" height="190" aria-label="Gr&aacute;fico de distribui&ccedil;&atilde;o do or&ccedil;amento"></canvas>
+          <div class="mini-grid">
+            <div class="mini-box"><span>Essenciais</span><strong id="miniNeeds">R$ 0,00</strong></div>
+            <div class="mini-box"><span>Vari&aacute;veis</span><strong id="miniWants">R$ 0,00</strong></div>
+            <div class="mini-box"><span>Reserva</span><strong id="miniFuture">R$ 0,00</strong></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="authSection" class="section">
+      <div class="auth-layout">
+        <article class="card strong">
+          <span class="tag info">Conta</span>
+          <h2>Entrar ou criar acesso</h2>
+          <p class="muted">O JWT fica salvo no navegador e &eacute; enviado no cabe&ccedil;alho Authorization das chamadas da API.</p>
+          <div class="tabs">
+            <button class="tab active" type="button" data-auth-tab="login">Login</button>
+            <button class="tab" type="button" data-auth-tab="register">Cadastro</button>
+          </div>
+          <form id="authForm" class="form-grid auth-form">
+            <div class="field full" id="nameField">
+              <label for="nameInput">Nome</label>
+              <input id="nameInput" type="text" autocomplete="name" placeholder="Seu nome" />
+            </div>
+            <div class="field full">
+              <label for="emailInput">Email</label>
+              <input id="emailInput" type="email" autocomplete="email" placeholder="voce@email.com" required />
+            </div>
+            <div class="field full">
+              <label for="passwordInput">Senha</label>
+              <input id="passwordInput" type="password" autocomplete="current-password" placeholder="M&iacute;nimo 8 caracteres" required />
+            </div>
+            <div class="field full field-hidden" id="twoFactorLoginField">
+              <label for="twoFactorLoginCode">C&oacute;digo 2FA</label>
+              <input id="twoFactorLoginCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" />
+            </div>
+            <div class="field full">
+              <button class="btn" type="submit" id="authSubmitBtn">Entrar</button>
+            </div>
+          </form>
+          <div class="account-recovery">
+            <button class="link-button" type="button" id="forgotPasswordBtn">Esqueci minha senha</button>
+            <div class="field full field-hidden" id="forgotPasswordPanel">
+              <label for="forgotEmailInput">Email da conta</label>
+              <input id="forgotEmailInput" type="email" autocomplete="email" placeholder="voce@email.com" />
+              <button class="btn secondary" type="button" id="requestPasswordResetBtn">Gerar link de recupera&ccedil;&atilde;o</button>
+            </div>
+            <div class="field full field-hidden" id="resetPasswordPanel">
+              <label for="resetPasswordInput">Nova senha</label>
+              <input id="resetPasswordInput" type="password" autocomplete="new-password" placeholder="M&iacute;nimo 8 caracteres" />
+              <button class="btn" type="button" id="resetPasswordBtn">Redefinir senha</button>
+            </div>
+            <p class="dev-link field-hidden" id="accountActionLink"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="appSection" class="app-hidden app-console">
+      <aside class="console-sidebar" aria-label="Navega&ccedil;&atilde;o do workspace">
+        <div class="workspace-switcher">
+          <span class="workspace-logo">TF</span>
+          <div>
+            <strong>TechFinances</strong>
+            <small>Workspace pessoal</small>
+          </div>
+        </div>
+        <nav class="console-nav" aria-label="Navega&ccedil;&atilde;o do dashboard">
+          <a href="#dashboard" class="active"><span>01</span> Overview</a>
+          <a href="#security"><span>02</span> Seguran&ccedil;a</a>
+          <a href="#lancamentos"><span>03</span> Lan&ccedil;amentos</a>
+          <a href="#metas"><span>04</span> Metas</a>
+          <a href="#ia"><span>05</span> IA privada</a>
+        </nav>
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>API online</strong>
+            <small>JWT + PostgreSQL</small>
+          </div>
+        </div>
+      </aside>
+
+      <div class="console-main">
+        <div class="command-bar" aria-label="Barra de comando">
+          <div class="command-search">
+            <span>Ctrl K</span>
+            <input id="globalSearchInput" type="search" aria-label="Pesquisar no dashboard" placeholder="Buscar lan&ccedil;amentos, categorias ou relat&oacute;rios..." />
+          </div>
+          <div class="command-actions">
+            <a class="btn secondary small" href="#lancamentos">Novo lan&ccedil;amento</a>
+            <button class="btn secondary small" type="button" id="exportPdfBtnConsole">PDF</button>
+          </div>
+        </div>
+
+        <section id="dashboard" class="section">
+          <div class="section-title">
+            <div>
+              <h2>Dashboard financeiro</h2>
+              <p>Resumo mensal calculado no back-end com base no per&iacute;odo selecionado.</p>
+              <span class="period-label" id="periodLabel">Per&iacute;odo atual</span>
+            </div>
+            <div class="period-filter" aria-label="Filtro por m&ecirc;s e ano">
+              <label for="periodMonth">M&ecirc;s</label>
+              <select id="periodMonth"></select>
+              <label for="periodYear">Ano</label>
+              <select id="periodYear"></select>
+              <button class="btn secondary" type="button" id="applyPeriodBtn">Aplicar</button>
+              <button class="btn secondary" type="button" id="demoBtn">Adicionar exemplo</button>
+            </div>
+          </div>
+
+          <div class="grid cols-4 bento-metrics">
+            <article class="card metric"><small>Receitas</small><strong id="totalIncome">R$ 0,00</strong><span>Entradas registradas.</span></article>
+            <article class="card metric"><small>Despesas</small><strong id="totalExpense">R$ 0,00</strong><span>Sa&iacute;das por categoria.</span></article>
+            <article class="card metric"><small>Saldo</small><strong id="netBalance">R$ 0,00</strong><span>Receitas menos despesas.</span></article>
+            <article class="card metric"><small>Sa&uacute;de financeira</small><strong id="healthScore">0%</strong><span id="healthMessage">Aguardando dados.</span></article>
+          </div>
+
+          <div class="work-grid">
+            <article class="card issue-panel" aria-label="Painel de tarefas financeiras">
+              <div class="panel-head">
+                <div><small>Finance operations</small><h3>Fila de prioridades</h3></div>
+                <span class="tag info">Sprint mensal</span>
+              </div>
+              <div class="issue-list">
+                <div class="issue-row"><span class="priority-dot high"></span><div><strong>Fechar diagn&oacute;stico do m&ecirc;s</strong><small>Resumo, saldo e categorias cr&iacute;ticas</small></div><span class="status-badge progress">In progress</span><span class="avatar">VC</span></div>
+                <div class="issue-row"><span class="priority-dot medium"></span><div><strong>Atualizar meta de reserva</strong><small>Meses de cobertura e aporte planejado</small></div><span class="status-badge review">Review</span><span class="avatar violet">AI</span></div>
+                <div class="issue-row"><span class="priority-dot low"></span><div><strong>Exportar pacote para an&aacute;lise</strong><small>Excel, PDF e recomenda&ccedil;&atilde;o educativa</small></div><span class="status-badge done">Ready</span><span class="avatar blue">TF</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="security" class="section">
+          <div class="section-title">
+            <div>
+              <h2>Perfil e seguran&ccedil;a</h2>
+              <p>Veja o usu&aacute;rio logado, configure 2FA e gerencie dispositivos confi&aacute;veis.</p>
+            </div>
+            <span class="tag info" id="twoFactorStatus">2FA inativo</span>
+          </div>
+
+          <div class="security-grid">
+            <article class="card strong profile-card">
+              <span class="profile-avatar" id="profileAvatar">TF</span>
+              <div><small>Usu&aacute;rio logado</small><h3 id="profileName">-</h3><p id="profileEmail">-</p></div>
+            </article>
+
+            <article class="card strong onboarding-card">
+              <div class="panel-head">
+                <div><small>Onboarding</small><h3>Primeiros passos</h3></div>
+                <span class="tag info" id="emailVerifiedStatus">Email pendente</span>
+              </div>
+              <div class="checklist">
+                <div class="check-item" id="checkEmail"><span></span>Confirmar email</div>
+                <div class="check-item" id="checkTwoFactor"><span></span>Ativar 2FA</div>
+                <div class="check-item" id="checkTransactions"><span></span>Cadastrar lan&ccedil;amentos</div>
+              </div>
+              <button class="btn secondary" type="button" id="resendVerificationBtn">Gerar link de confirma&ccedil;&atilde;o</button>
+              <p class="dev-link field-hidden" id="emailVerificationLink"></p>
+            </article>
+
+            <article class="card strong security-card">
+              <div class="security-copy">
+                <h3>Autentica&ccedil;&atilde;o em duas etapas</h3>
+                <p class="muted">Use Google Authenticator, Microsoft Authenticator ou outro app compat&iacute;vel com TOTP.</p>
+                <button class="btn" type="button" id="setupTwoFactorBtn">Configurar 2FA</button>
+              </div>
+              <div class="security-panel field-hidden" id="twoFactorSetupPanel">
+                <img id="twoFactorQrCode" class="qr-code" alt="QR Code para configurar 2FA" />
+                <label for="twoFactorEnableCode">C&oacute;digo do app autenticador</label>
+                <input id="twoFactorEnableCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" />
+                <small>Chave manual: <code id="twoFactorManualKey">-</code></small>
+                <button class="btn" type="button" id="enableTwoFactorBtn">Ativar 2FA</button>
+              </div>
+              <div class="security-panel" id="twoFactorDisablePanel">
+                <label for="twoFactorDisablePassword">Senha atual</label>
+                <input id="twoFactorDisablePassword" type="password" autocomplete="current-password" placeholder="Sua senha" />
+                <label for="twoFactorDisableCode">C&oacute;digo 2FA</label>
+                <input id="twoFactorDisableCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" />
+                <button class="btn secondary" type="button" id="disableTwoFactorBtn">Desativar 2FA</button>
+              </div>
+            </article>
+
+            <article class="card strong profile-edit-card">
+              <div class="section-title compact-title">
+                <div>
+                  <h3>Editar perfil</h3>
+                  <p>Atualize nome e email da conta. Ao trocar email, uma nova confirma&ccedil;&atilde;o ser&aacute; gerada.</p>
+                </div>
+              </div>
+              <div class="form-grid auth-form">
+                <div class="field full">
+                  <label for="profileNameInput">Nome</label>
+                  <input id="profileNameInput" type="text" autocomplete="name" />
+                </div>
+                <div class="field full">
+                  <label for="profileEmailInput">Email</label>
+                  <input id="profileEmailInput" type="email" autocomplete="email" />
+                </div>
+                <div class="field full">
+                  <button class="btn" type="button" id="saveProfileBtn">Salvar perfil</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="card strong devices-card">
+              <div class="devices-head">
+                <div><h3>Dispositivos confi&aacute;veis</h3><p class="muted">Dispositivos validados n&atilde;o pedem 2FA novamente.</p></div>
+                <button class="btn secondary" type="button" id="revokeDevicesBtn">Sair de todos os outros</button>
+              </div>
+              <div class="trusted-devices" id="trustedDevicesList"><p class="muted">Nenhum dispositivo carregado.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title"><div><h2>Or&ccedil;amento 50-30-20</h2><p>Configura&ccedil;&atilde;o persistida no PostgreSQL por usu&aacute;rio.</p></div></div>
+          <article class="card strong">
+            <div class="form-grid">
+              <div class="field wide"><label for="salaryInput">Sal&aacute;rio l&iacute;quido mensal</label><input id="salaryInput" type="number" min="0" step="0.01" /></div>
+              <div class="field"><label for="needsPct">Essenciais %</label><input id="needsPct" type="number" min="0" max="100" step="1" /></div>
+              <div class="field"><label for="wantsPct">Vari&aacute;veis %</label><input id="wantsPct" type="number" min="0" max="100" step="1" /></div>
+              <div class="field"><label for="futurePct">Reserva %</label><input id="futurePct" type="number" min="0" max="100" step="1" /></div>
+              <div class="field"><button class="btn" type="button" id="saveConfigBtn">Salvar</button></div>
+            </div>
+          </article>
+          <div class="grid cols-2 with-gap">
+            <article class="card">
+              <h3>Uso do or&ccedil;amento</h3>
+              <div class="progress-wrap">
+                <div class="progress-line"><div class="progress-head"><span>Essenciais</span><span id="needsUsageText">R$ 0,00 / R$ 0,00</span></div><div class="bar"><i id="needsBar"></i></div></div>
+                <div class="progress-line"><div class="progress-head"><span>Vari&aacute;veis</span><span id="wantsUsageText">R$ 0,00 / R$ 0,00</span></div><div class="bar"><i id="wantsBar"></i></div></div>
+                <div class="progress-line"><div class="progress-head"><span>Prioridades</span><span id="futureUsageText">R$ 0,00 / R$ 0,00</span></div><div class="bar"><i id="futureBar"></i></div></div>
+              </div>
+            </article>
+            <article class="card chart-card"><h3>Despesas por categoria</h3><canvas id="categoryChart" height="280" aria-label="Gr&aacute;fico de despesas por categoria"></canvas></article>
+          </div>
+        </section>
+
+        <section id="categorias" class="section">
+          <div class="section-title">
+            <div>
+              <h2>Categorias</h2>
+              <p>Crie categorias personalizadas para receitas e despesas sem perder a regra 50-30-20.</p>
+            </div>
+          </div>
+          <article class="card strong">
+            <form id="categoryForm" class="form-grid">
+              <div class="field full">
+                <label for="categoryNameInput">Nome da categoria</label>
+                <input id="categoryNameInput" type="text" maxlength="40" placeholder="Ex.: Pet, Academia, Cliente fixo" />
+              </div>
+              <div class="field">
+                <label for="categoryTypeInput">Tipo</label>
+                <select id="categoryTypeInput">
+                  <option value="expense">Despesa</option>
+                  <option value="income">Receita</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="categoryGroupInput">Grupo</label>
+                <select id="categoryGroupInput">
+                  <option value="essencial">Essencial</option>
+                  <option value="variavel">Vari&aacute;vel</option>
+                  <option value="prioridade">Prioridade</option>
+                </select>
+              </div>
+              <div class="field">
+                <button class="btn" type="submit">Criar categoria</button>
+              </div>
+            </form>
+          </article>
+          <article class="card with-gap">
+            <div class="category-list" id="categoriesList">
+              <p class="muted">Nenhuma categoria carregada.</p>
+            </div>
+          </article>
+        </section>
+
+        <section id="lancamentos" class="section">
+          <div class="section-title"><div><h2>Lan&ccedil;amentos</h2><p>Cada registro pertence ao usu&aacute;rio autenticado.</p></div></div>
+          <article class="card strong">
+            <form id="transactionForm" class="form-grid">
+              <div class="field"><label for="typeInput">Tipo</label><select id="typeInput"><option value="income">Receita</option><option value="expense">Despesa</option></select></div>
+              <div class="field"><label for="dateInput">Data</label><input id="dateInput" type="date" required /></div>
+              <div class="field full"><label for="categoryInput">Categoria/Fonte</label><select id="categoryInput"></select></div>
+              <div class="field full"><label for="descriptionInput">Descri&ccedil;&atilde;o</label><input id="descriptionInput" type="text" placeholder="Ex.: sal&aacute;rio, mercado, transporte..." required /></div>
+              <div class="field"><label for="amountInput">Valor</label><input id="amountInput" type="number" min="0.01" step="0.01" placeholder="0,00" required /></div>
+              <div class="field"><button class="btn" type="submit">Adicionar</button></div>
+            </form>
+          </article>
+          <article class="card with-gap">
+            <div class="table-tools">
+              <div class="left">
+                <select id="filterType"><option value="all">Todos</option><option value="income">Receitas</option><option value="expense">Despesas</option></select>
+                <input id="searchInput" type="search" placeholder="Buscar por descri&ccedil;&atilde;o/categoria" />
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Data</th><th>Tipo</th><th>Categoria/Fonte</th><th>Descri&ccedil;&atilde;o</th><th>Valor</th><th>A&ccedil;&atilde;o</th></tr></thead>
+                <tbody id="transactionsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section id="metas" class="section">
+          <div class="section-title"><div><h2>Meta de reserva</h2><p>Meta calculada pela API usando gastos essenciais ou limite essencial.</p></div></div>
+          <article class="card strong">
+            <div class="form-grid goal-grid">
+              <div class="field"><label for="emergencyMonths">Meses de cobertura</label><input id="emergencyMonths" type="number" min="1" max="24" step="1" /></div>
+              <div class="field"><label for="emergencyCurrent">Valor reservado</label><input id="emergencyCurrent" type="number" min="0" step="0.01" /></div>
+              <div class="field"><button class="btn" type="button" id="saveGoalBtn">Atualizar meta</button></div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-line"><div class="progress-head"><span>Progresso</span><span id="emergencyText">R$ 0,00 / R$ 0,00</span></div><div class="bar"><i id="emergencyBar"></i></div></div>
+            </div>
+          </article>
+        </section>
+
+        <section id="ia" class="section">
+          <div class="section-title"><div><h2>IA com privacidade</h2><p>A API recebe somente resumo an&ocirc;nimo, sem nome, email ou transa&ccedil;&otilde;es completas.</p></div></div>
+          <div class="grid cols-2">
+            <article class="card strong">
+              <div class="form-grid">
+                <div class="field"><label for="riskProfile">Perfil</label><select id="riskProfile"><option value="conservador">Conservador</option><option value="moderado">Moderado</option><option value="arrojado">Arrojado</option></select></div>
+                <div class="field"><label for="goalHorizon">Prazo</label><select id="goalHorizon"><option value="curto">Curto prazo</option><option value="medio">M&eacute;dio prazo</option><option value="longo">Longo prazo</option></select></div>
+                <div class="field full"><label for="monthlyContribution">Aporte mensal planejado</label><input id="monthlyContribution" type="number" min="0" step="0.01" placeholder="Ex.: 300" /></div>
+                <label class="consent-check field full" for="aiConsentInput">
+                  <input id="aiConsentInput" type="checkbox" />
+                  <span>Autorizo gerar uma an&aacute;lise usando somente indicadores financeiros resumidos e an&ocirc;nimos.</span>
+                </label>
+                <div class="field full"><button class="btn" type="button" id="generateRecommendationBtn">Gerar recomenda&ccedil;&atilde;o educativa</button></div>
+              </div>
+            </article>
+            <article class="card recommendation" id="recommendationBox">
+              <span class="tag warn">Aviso</span>
+              <p>Esta &aacute;rea &eacute; educativa e n&atilde;o substitui consultoria financeira profissional.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="console-details" aria-label="Painel de detalhes">
+        <div class="details-card">
+          <span class="tag info">Details</span>
+          <h3>Review financeiro</h3>
+          <p>Use o filtro de m&ecirc;s e ano para analisar um per&iacute;odo, gerar PDF e validar se o or&ccedil;amento continua saud&aacute;vel.</p>
+          <div class="detail-stack">
+            <div><span>Status</span><strong>Active</strong></div>
+            <div><span>Priority</span><strong>P1 mensal</strong></div>
+            <div><span>Privacy</span><strong>Resumo an&ocirc;nimo</strong></div>
+          </div>
+        </div>
+        <div class="details-card compact">
+          <h3>Assignees</h3>
+          <div class="avatar-group" aria-label="Respons&aacute;veis">
+            <span class="avatar">VC</span>
+            <span class="avatar violet">IA</span>
+            <span class="avatar blue">DB</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./assets/app.js" type="module"></script>
+</body>
+</html>
