@@ -15,7 +15,7 @@
     "prisma:generate": "npm --prefix backend run prisma:generate",
     "prisma:migrate": "npm --prefix backend run prisma:migrate",
     "prisma:migrate:deploy": "npm --prefix backend run prisma:migrate:deploy",
-    "render:build": "npm --prefix backend ci && npm run prisma:generate",
+    "render:build": "npm --prefix backend install && npm run prisma:generate",
     "deploy:check": "node backend/src/scripts/validateDeployEnv.js",
     "deploy:start": "npm run deploy:check && npm run prisma:migrate:deploy && npm start"
   }
