@@ -441,6 +441,8 @@ function publicUser(user) {
 }
 
 function buildDevEmailVerification(token) {
+  if (!config.exposeAccountActionTokens) return null;
+
   return {
     token,
     link: buildEmailVerificationLink(token),
@@ -449,6 +451,8 @@ function buildDevEmailVerification(token) {
 }
 
 function buildDevPasswordReset(token) {
+  if (!config.exposeAccountActionTokens) return null;
+
   return {
     token,
     link: buildPasswordResetLink(token),

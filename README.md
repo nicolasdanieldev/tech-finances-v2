@@ -75,7 +75,7 @@ database/
   README.md
 ```
 
-O arquivo `index.html` da raiz foi mantido como legado do MVP V1. A aplicacao V2 esta em `frontend/` e tambem e servida pelo Express.
+A aplicacao V2 esta em `frontend/` e tambem e servida pelo Express.
 
 ## Como rodar
 
@@ -211,6 +211,16 @@ Recursos gratuitos/local-first:
 - Excel e gerado pelo back-end com `exceljs`.
 - PDF mensal e gerado pelo back-end com resumo, diagnostico visual, barras de orcamento, top despesas e plano de acao.
 - PostgreSQL pode rodar localmente gratis ou em provedor com plano gratuito.
+
+## Seguranca
+
+- `.env`, banco local, logs, `.tmp/` e `node_modules/` ficam fora do Git.
+- Em producao, a API exige `JWT_SECRET` configurado.
+- CORS fica restrito ao `FRONTEND_ORIGIN` configurado.
+- Helmet aplica cabecalhos de seguranca e Content Security Policy.
+- As rotas `/api` usam rate limit para reduzir abuso e brute force.
+- Tokens de confirmacao de email e recuperacao de senha so aparecem fora de producao para facilitar testes locais.
+- `npm audit --omit=dev` deve retornar `found 0 vulnerabilities` antes do deploy.
 
 ## Login seguro
 

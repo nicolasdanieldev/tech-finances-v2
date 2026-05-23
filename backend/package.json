@@ -21,8 +21,9 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "exceljs": "3.4.0",
+    "exceljs": "^4.4.0",
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.1",
@@ -36,5 +37,8 @@
     "prisma": "^6.19.0",
     "supertest": "^7.2.2",
     "vitest": "^4.1.5"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
   }
 }
