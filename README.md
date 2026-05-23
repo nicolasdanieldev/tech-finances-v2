@@ -135,6 +135,38 @@ Email: demo@techfinances.dev
 Senha: DemoSenha123
 ```
 
+## Deploy
+
+O projeto esta pronto para deploy como um unico servico Node, porque o Express serve a API e tambem os arquivos de `frontend/`.
+
+### Render
+
+1. Crie ou use um PostgreSQL gerenciado. Uma opcao gratuita comum e Neon. Se usar Neon, copie a connection string com `sslmode=require`.
+2. No Render, crie um novo **Blueprint** apontando para este repositorio.
+3. O arquivo `render.yaml` cria o Web Service `tech-finances-v2`.
+4. Quando o Render pedir variaveis secretas, informe:
+
+```txt
+DATABASE_URL=sua_connection_string_postgresql
+```
+
+O `JWT_SECRET` sera gerado automaticamente pelo Render via `generateValue`.
+
+Comandos usados no deploy:
+
+```txt
+Build: npm run render:build
+Start: npm run deploy:start
+```
+
+O start executa `prisma migrate deploy` antes de iniciar a API, garantindo que o banco receba as migrations versionadas.
+
+Depois do deploy, teste:
+
+```txt
+https://seu-app.onrender.com/api/health
+```
+
 ## Testes automatizados
 
 Para rodar os testes do back-end:

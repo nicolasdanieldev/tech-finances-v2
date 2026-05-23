@@ -2,7 +2,7 @@ import "dotenv/config";
 
 const isProduction = process.env.NODE_ENV === "production";
 const jwtSecret = process.env.JWT_SECRET || (isProduction ? null : "dev-secret-change-me");
-const frontendOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3333";
+const frontendOrigin = process.env.FRONTEND_ORIGIN || process.env.RENDER_EXTERNAL_URL || "http://localhost:3333";
 
 if (!jwtSecret) {
   throw new Error("JWT_SECRET precisa ser definido em producao.");

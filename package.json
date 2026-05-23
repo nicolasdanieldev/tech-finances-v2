@@ -13,6 +13,9 @@
     "test": "powershell -ExecutionPolicy Bypass -File database/test-backend.ps1",
     "db:seed": "npm --prefix backend run db:seed",
     "prisma:generate": "npm --prefix backend run prisma:generate",
-    "prisma:migrate": "npm --prefix backend run prisma:migrate"
+    "prisma:migrate": "npm --prefix backend run prisma:migrate",
+    "prisma:migrate:deploy": "npm --prefix backend run prisma:migrate:deploy",
+    "render:build": "npm run install:all && npm run prisma:generate",
+    "deploy:start": "npm run prisma:migrate:deploy && npm start"
   }
 }
