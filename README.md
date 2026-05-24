@@ -2,6 +2,12 @@
 
 TechFinances V2 e uma aplicacao full-stack de financas pessoais criada para portfolio. Ela evolui um MVP em HTML/CSS/JS com `localStorage` para uma arquitetura com API, login, banco de dados, exportacao Excel e recomendacao educativa com privacidade.
 
+## Deploy em producao
+
+- Aplicacao: https://tech-finances-v2.onrender.com
+- Health check da API: https://tech-finances-v2.onrender.com/api/health
+- Repositorio: https://github.com/nicolasdanieldev/tech-finances-v2
+
 ## Problema
 
 Planilhas ajudam no controle financeiro, mas ficam limitadas quando o objetivo e demonstrar habilidades reais de mercado: autenticacao, persistencia, validacao, seguranca, API REST, banco relacional e deploy.
@@ -37,7 +43,7 @@ A V2 transforma a experiencia em um produto web:
 - Back-end: Node.js, Express, Zod, JWT, bcrypt.
 - Banco: PostgreSQL + Prisma.
 - Excel: exceljs.
-- Deploy sugerido: Vercel para front-end e um provedor com plano gratuito para API + PostgreSQL.
+- Deploy: Render + PostgreSQL gerenciado.
 
 ## GitHub Topics
 
@@ -172,7 +178,7 @@ Se o deploy falhar, confira primeiro:
 Depois do deploy, teste:
 
 ```txt
-https://seu-app.onrender.com/api/health
+https://tech-finances-v2.onrender.com/api/health
 ```
 
 ## Testes automatizados
